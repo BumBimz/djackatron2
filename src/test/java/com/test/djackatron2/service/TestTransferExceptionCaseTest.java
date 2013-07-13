@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.test.djackatron2.model.Account;
+import com.test.djackatron2.repository.AccountRepository;
 
 import static org.junit.Assert.assertThat;
 

@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import com.test.djackatron2.model.Account;
-import com.test.djackatron2.service.AccountRepository;
+import com.test.djackatron2.repository.AccountRepository;
 
 
 import static org.mockito.Mockito.*;

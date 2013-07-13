@@ -1,4 +1,4 @@
-package com.test.djackatron2.service;
+package com.test.djackatron2.repository;
 
 import com.test.djackatron2.model.Account;
 

@@ -14,6 +14,7 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.test.djackatron2.model.Account;
+import com.test.djackatron2.repository.AccountRepository;
 
 
 @RunWith (value=Parameterized.class)
