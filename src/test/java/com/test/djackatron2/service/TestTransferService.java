@@ -6,6 +6,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import java.util.Arrays;
 import java.util.Collection;
 
+import org.joda.time.LocalTime;
 import org.junit.Test;
 import static org.junit.Assert.assertThat;
 import org.junit.runner.RunWith;
@@ -54,6 +55,8 @@ public class TestTransferService {
 		desAcc.setBalance(desBalance);
 		
 		DefaultTransferService transferService = new DefaultTransferService();
+		DefaultTimeService timeService = mock(DefaultTimeService.class);
+		when(timeService.isServiceAvailiable(any(LocalTime.class))).thenReturn(true);
 		
 		FeePolicy feePolicy = mock(FeePolicy.class);
 		when(feePolicy.calculateTransferRate(anyDouble())).thenReturn(flatRate);
@@ -64,12 +67,13 @@ public class TestTransferService {
 		
 		transferService.setFeePolicy(feePolicy);
 		transferService.setAccountRepository(accountRepository);
-		
+		transferService.setTimeService(timeService);
 		//when
 		transferService.transfer(amount,srcAccId,desAccId);
 		//then
 		assertThat(srcAcc.getBalance(),equalTo(newsrcBalance));
-		assertThat(desAcc.getBalance(),equalTo(newdesBalance));		
+		assertThat(desAcc.getBalance(),equalTo(newdesBalance));	
+		verify(timeService).isServiceAvailiable(any(LocalTime.class));
 	}
 	
 }

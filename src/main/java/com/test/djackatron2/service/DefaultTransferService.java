@@ -1,9 +1,12 @@
 package com.test.djackatron2.service;
 
+import org.joda.time.LocalTime;
+
 public class DefaultTransferService {
 	private AccountRepository accountRepository;
 	private FeePolicy feePolicy;
 	private double minimumTrasfer;
+	private DefaultTimeService timeService;
 
 	public void setAccountRepository(AccountRepository accountRepository) {
 		this.accountRepository = accountRepository;
@@ -16,8 +19,10 @@ public class DefaultTransferService {
 	
 	public void transfer(double amount, long srcAccId, long desAccId) {
 		Account srcAcc = accountRepository.find(srcAccId);
-		
 		Account desAcc = accountRepository.find(desAccId);
+		
+		if(!timeService.isServiceAvailiable(new LocalTime()))
+			throw new IllegalArgumentException();
 		
 		double srcbalance = srcAcc.getBalance();
 		if(amount <= 0)
@@ -28,9 +33,8 @@ public class DefaultTransferService {
 		
 		if(srcbalance<amount)
 			throw new InsufficiantFundException();
-			
-		srcbalance = srcbalance - (amount + feePolicy.calculateTransferRate(amount));
 		
+		srcbalance = srcbalance - (amount + feePolicy.calculateTransferRate(amount));
 		
 		double desbalance = desAcc.getBalance();
 		desbalance = desbalance + amount;
@@ -41,6 +45,10 @@ public class DefaultTransferService {
 
 	public void setMinimumTransfer(double minimumTransfer) {
 		this.minimumTrasfer = minimumTransfer;
+	}
+
+	public void setTimeService(DefaultTimeService timeService) {
+		this.timeService = timeService;
 	}
 
 	
