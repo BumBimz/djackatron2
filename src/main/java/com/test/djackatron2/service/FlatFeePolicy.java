@@ -10,5 +10,6 @@ public class FlatFeePolicy implements FeePolicy{
 	public double calculateTransferRate(double transferAmount){
 		return transferFee;
 	}
+	
 
 }
