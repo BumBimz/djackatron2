@@ -13,6 +13,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
+import com.test.djackatron2.model.Account;
+
 
 @RunWith (value=Parameterized.class)
 public class TestTransferService {

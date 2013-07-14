@@ -2,6 +2,8 @@ package com.test.djackatron2.service;
 
 import org.joda.time.LocalTime;
 
+import com.test.djackatron2.model.Account;
+
 public class DefaultTransferService {
 	private AccountRepository accountRepository;
 	private FeePolicy feePolicy;
